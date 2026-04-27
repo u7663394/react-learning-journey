@@ -5,6 +5,7 @@
 // 1. 导包
 import React from "react";
 import { createRoot } from "react-dom/client";
+import "./index.css";
 
 // 2. 创建 React 根对象
 const root = createRoot(document.querySelector("#root"));
@@ -38,3 +39,45 @@ root.render(
 
 console.log(<h1 className="title">Hello</h1>);
 console.log(React.createElement("h1", { className: "title" }, "Hello"));
+
+/**
+ * JSX 中 {} 的应用
+ *
+ * 常见场景:
+ *   1. 列表渲染 (e.g. map)
+ *     - map 方法
+ *     - key 属性需要唯一
+ *   2. 条件渲染 (e.g. &&, ?:)
+ *     - && 一个内容, 渲染 or 不渲染
+ *     - ?: 两个内容, 渲染 A or 渲染 B
+ *   3. 样式处理 (e.g. className)
+ */
+const categories = [
+  { id: 1, name: "Recommend" },
+  { id: 2, name: "Small Combo" },
+  { id: 3, name: "Dessert" },
+  { id: 4, name: "Entry" },
+  { id: 5, name: "Main Meal" },
+];
+
+const selectedId = 2;
+
+root.render(
+  <div style={{ width: "80px" }}>
+    <ul className="list">
+      {categories.map((ele, index) => {
+        return (
+          <li
+            key={ele.id}
+            className={
+              ele.id === selectedId ? "list-item selected" : "list-item"
+            }
+          >
+            {index === 0 && <span>🔥</span>}
+            {ele.name}
+          </li>
+        );
+      })}
+    </ul>
+  </div>,
+);
