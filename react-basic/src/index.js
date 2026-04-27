@@ -3,7 +3,7 @@
  */
 
 // 1. 导包
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./MyApp.css";
@@ -136,5 +136,39 @@ root.render(
   <div>
     <MyApp />
     <App />
+  </div>,
+);
+
+/**
+ * 状态: 可以让页面内容发送变化的数据
+ *
+ * 语法: const [state, setState] = useState(initState)
+ *   1. state: 存储状态的变量
+ *   2. setState: 更新状态的函数
+ *   3. initState: 状态的初始值
+ *   4. useState React提供, 在函数组件中使用
+ */
+
+const Counter = () => {
+  const [count, setCount] = useState(10);
+  console.log("Counter 渲染了", count);
+
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        +1
+      </button>
+    </div>
+  );
+};
+
+root.render(
+  <div>
+    <Counter />
   </div>,
 );
