@@ -15,6 +15,7 @@ const defaultList = [
     content: "哎哟，不错哦",
     ctime: "10-18 08:15",
     like: 68,
+    action: 0,
   },
   {
     rpid: 2,
@@ -26,6 +27,7 @@ const defaultList = [
     content: "我寻你千百度 日出到迟暮",
     ctime: "11-13 11:29",
     like: 66,
+    action: 2,
   },
   {
     rpid: 1,
@@ -37,6 +39,7 @@ const defaultList = [
     content: "Learn React step by step",
     ctime: "10-19 09:00",
     like: 99,
+    action: 1,
   },
 ];
 
@@ -54,6 +57,38 @@ const App = () => {
   // 删除评论
   const onDelete = (rpid) => {
     setList(list.filter((ele) => ele.rpid !== rpid));
+  };
+
+  // 点赞
+  const onLike = (rpid) => {
+    setList(
+      list.map((ele) => {
+        if (ele.rpid === rpid) {
+          return {
+            ...ele,
+            action: ele.action === 1 ? 0 : 1,
+            like: ele.action === 1 ? ele.like - 1 : ele.like + 1,
+          };
+        }
+        return ele;
+      }),
+    );
+  };
+
+  // 不喜欢
+  const onDislike = (rpid) => {
+    setList(
+      list.map((ele) => {
+        if (ele.rpid === rpid) {
+          return {
+            ...ele,
+            action: ele.action === 2 ? 0 : 2,
+            like: ele.action === 1 ? ele.like - 1 : ele.like,
+          };
+        }
+        return ele;
+      }),
+    );
   };
 
   return (
@@ -126,12 +161,26 @@ const App = () => {
                       <span className="reply-time">{item.ctime}</span>
                       {/* 喜欢 */}
                       <span className="reply-like">
-                        <button>like</button>
+                        <i
+                          className={
+                            item.action === 1
+                              ? "icon like-icon liked"
+                              : "icon like-icon"
+                          }
+                          onClick={() => onLike(item.rpid)}
+                        />
                         <span>{item.like}</span>
                       </span>
                       {/* 不喜欢 */}
                       <span className="reply-dislike">
-                        <button className="icon icon-dislike">dislike</button>
+                        <i
+                          className={
+                            item.action === 2
+                              ? "icon dislike-icon disliked"
+                              : "icon dislike-icon"
+                          }
+                          onClick={() => onDislike(item.rpid)}
+                        />
                       </span>
                       {user.uid === item.user.uid && (
                         <span
