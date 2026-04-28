@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
+import orderBy from "lodash/orderBy";
 // 使用本地图片需要先导入
 import avatar from "./assets/avatar.svg";
 
@@ -50,9 +51,18 @@ const user = {
   uname: "React Learner",
 };
 
+// Tab 数组
+const tabs = [
+  { type: "hot", name: "最热" },
+  { type: "time", name: "最新" },
+];
+
 const App = () => {
   // 评论列表状态
   const [list, setList] = useState(defaultList);
+
+  // 当前 Tab 状态
+  const [activeTab, setActiveTab] = useState("hot");
 
   // 删除评论
   const onDelete = (rpid) => {
@@ -91,6 +101,17 @@ const App = () => {
     );
   };
 
+  // 切换 Tab
+  const onToggle = (type) => {
+    setActiveTab(type);
+    if (type === "time") {
+      // orderBy(对谁排序, 按照谁排, 顺序)
+      setList(orderBy(list, "ctime", "desc"));
+    } else {
+      setList(orderBy(list, "like", "desc"));
+    }
+  };
+
   return (
     <div className="app">
       {/* 导航 Tab */}
@@ -103,8 +124,19 @@ const App = () => {
           </li>
           <li className="nav-sort">
             {/* 高亮类名： active */}
-            <span className="nav-item">最新</span>
-            <span className="nav-item">最热</span>
+            {tabs.map((ele) => {
+              return (
+                <span
+                  key={ele.type}
+                  className={
+                    ele.type === activeTab ? "nav-item active" : "nav-item"
+                  }
+                  onClick={() => onToggle(ele.type)}
+                >
+                  {ele.name}
+                </span>
+              );
+            })}
           </li>
         </ul>
       </div>
