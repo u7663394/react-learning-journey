@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
+import App from "./App";
 
 const root = createRoot(document.querySelector("#root"));
 
-root.render(<div>B站评论案例</div>);
+root.render(<App />);
