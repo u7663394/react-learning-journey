@@ -48,7 +48,13 @@ const user = {
 };
 
 const App = () => {
+  // 评论列表状态
   const [list, setList] = useState(defaultList);
+
+  // 删除评论
+  const onDelete = (rpid) => {
+    setList(list.filter((ele) => ele.rpid !== rpid));
+  };
 
   return (
     <div className="app">
@@ -127,7 +133,14 @@ const App = () => {
                       <span className="reply-dislike">
                         <button className="icon icon-dislike">dislike</button>
                       </span>
-                      <span className="delete-btn">删除</span>
+                      {user.uid === item.user.uid && (
+                        <span
+                          className="delete-btn"
+                          onClick={() => onDelete(item.rpid)}
+                        >
+                          删除
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
