@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.scss";
 import orderBy from "lodash/orderBy";
+import dayjs from "dayjs";
 // 使用本地图片需要先导入
 import avatar from "./assets/avatar.svg";
 
@@ -64,6 +65,9 @@ const App = () => {
   // 当前 Tab 状态
   const [activeTab, setActiveTab] = useState("hot");
 
+  // 评论表单状态
+  const [comment, setComment] = useState("");
+
   // 删除评论
   const onDelete = (rpid) => {
     setList(list.filter((ele) => ele.rpid !== rpid));
@@ -101,6 +105,28 @@ const App = () => {
     );
   };
 
+  // 发布评论
+  const onSend = () => {
+    if (comment.trim()) {
+      // 1. 构造新评论
+      const newComment = {
+        rpid: Date.now(),
+        user,
+        content: comment,
+        ctime: dayjs().format("MM-DD HH:mm"),
+        like: 0,
+        action: 0,
+      };
+      // 2. 添加到列表中
+      const newList = [newComment, ...list];
+      setList(
+        orderBy(newList, activeTab === "time" ? "ctime" : "like", "desc"),
+      );
+      // 3. 清空输入框
+      setComment("");
+    }
+  };
+
   // 切换 Tab
   const onToggle = (type) => {
     setActiveTab(type);
@@ -111,6 +137,12 @@ const App = () => {
       setList(orderBy(list, "like", "desc"));
     }
   };
+
+  // 获取评论框焦点
+  const commentRef = useRef(null);
+  if (!comment.trim()) {
+    commentRef.current.focus();
+  }
 
   return (
     <div className="app">
@@ -153,11 +185,14 @@ const App = () => {
           <div className="reply-box-wrap">
             {/* 评论框 */}
             <textarea
+              ref={commentRef}
               className="reply-box-textarea"
               placeholder="发一条友善的评论"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
             {/* 发布按钮 */}
-            <div className="reply-box-send">
+            <div className="reply-box-send" onClick={onSend}>
               <div className="send-text">发布</div>
             </div>
           </div>
