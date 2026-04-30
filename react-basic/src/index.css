@@ -30,3 +30,7 @@
   height: 100px;
   background-color: pink;
 }
+
+.todo-done {
+  text-decoration: line-through;
+}
