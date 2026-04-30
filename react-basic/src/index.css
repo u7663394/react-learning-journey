@@ -34,3 +34,114 @@
 .todo-done {
   text-decoration: line-through;
 }
+
+/* 全局重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* 主容器 */
+.app {
+  display: flex;
+  width: 800px;
+  height: 500px;
+  border: 1px solid #ddd;
+  margin: 40px auto;
+  overflow: hidden;
+}
+
+/* 左侧好友列表 */
+.friends {
+  width: 260px;
+  border-right: 1px solid #eee;
+  overflow-y: auto;
+  background: #fafafa;
+}
+
+.friend {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.friend:hover {
+  background: #f0f0f0;
+}
+
+.friend.selected {
+  background: #e6f7ff;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.date {
+  color: #999;
+  font-size: 12px;
+}
+
+.msg {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* 右侧聊天区域 */
+.chat-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部 */
+.chat-wrapper .header {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  background: #fff;
+}
+
+/* 聊天列表 */
+.chat-wrapper .list {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f5f5f5;
+}
+
+/* 输入区域 */
+.chat-wrapper .input {
+  height: 60px;
+  border-top: 1px solid #eee;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
