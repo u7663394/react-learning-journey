@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redux 快速体验</title>
+  </head>
+  <body>
+    <button id="decrement">-</button>
+    <span id="counter">0</span>
+    <button id="increment">+</button>
+
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script>
+      /**
+       * Redux: 是 React 中最常用的集中状态管理工具, 类似于 Pinia,
+       * 可以独立于框架运行。
+       *
+       * 作用: 通过集中管理的方式管理组件间的状态。
+       *
+       * 语法:
+       *   1. 定义一个 reducer 函数, 用于返回新的状态。
+       *   2. createStore(reducer) 创建一个 store 对象。
+       *   3. 使用 store.subscribe() 订阅监听状态的变化。
+       *   4. 使用 store.dispatch(action) 触发状态的变化。
+       *   5. 在组件中使用 store.getState() 获取当前状态更新视图。
+       *
+       * 总结:
+       *   1. state: 一个对象, 用于存储状态数据。
+       *   2. action: 一个对象, 用于描述状态变化事件 (type 属性)。
+       *   3. reducer: 一个函数, 根据 action 返回新的 state。
+       */
+
+      // 1. 定义 reducer 函数: 根据不同 action 返回不同状态
+      function reducer(state = { count: 0 }, action) {
+        if (action.type === "INCREMENT") {
+          return { count: state.count + 1 };
+        }
+        if (action.type === "DECREMENT") {
+          return { count: state.count - 1 };
+        }
+        return state;
+      }
+
+      // 2. 创建 store 对象
+      const store = Redux.createStore(reducer);
+
+      // 3. 订阅状态变化: 状态变化时自动执行
+      store.subscribe(() => {
+        console.log("数据变化了");
+
+        // 5. 使用 store.getState() 获取当前状态更新视图
+        document.getElementById("counter").innerText = store.getState().count;
+      });
+
+      // 4. 触发状态变化: 通过 dispatch 提交 action
+      const addBtn = document.getElementById("increment");
+      const subBtn = document.getElementById("decrement");
+      addBtn.addEventListener("click", () => {
+        store.dispatch({ type: "INCREMENT" });
+      });
+      subBtn.addEventListener("click", () => {
+        store.dispatch({ type: "DECREMENT" });
+      });
+    </script>
+  </body>
+</html>
