@@ -18,18 +18,22 @@ const counterStore = createSlice({
     decrement: (state) => {
       state.count -= 1;
     },
+    // 传参 -> action.payload
+    addValue: (state, action) => {
+      state.count += action.payload;
+    },
   },
 });
 
 /**
  * 获取 actions 和 reducer
  */
-const { increment, decrement } = counterStore.actions;
+const { increment, decrement, addValue } = counterStore.actions;
 const counterReducer = counterStore.reducer;
 
 /**
  * 按需导出 actions
  * 默认导出 reducer
  */
-export { increment, decrement };
+export { increment, decrement, addValue };
 export default counterReducer;
