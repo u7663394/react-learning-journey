@@ -6,15 +6,19 @@ const foodStore = createSlice({
   name: "foods",
   initialState: {
     foodsList: [],
+    activeIndex: 0,
   },
   reducers: {
     setFoodsList(state, action) {
       state.foodsList = action.payload;
     },
+    setActiveIndex(state, action) {
+      state.activeIndex = action.payload;
+    },
   },
 });
 
-const { setFoodsList } = foodStore.actions;
+const { setFoodsList, setActiveIndex } = foodStore.actions;
 const takeawayReducer = foodStore.reducer;
 
 // 2. 异步请求数据
@@ -26,5 +30,5 @@ const fetchFoodsList = () => {
 };
 
 // 3. 导出 action 和 reducer
-export { fetchFoodsList };
+export { fetchFoodsList, setActiveIndex };
 export default takeawayReducer;
