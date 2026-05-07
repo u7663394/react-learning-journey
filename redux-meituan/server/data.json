@@ -14,7 +14,8 @@
           "price": 90,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=烤羊肉串",
           "description": "",
-          "tag": "318569657"
+          "tag": "318569657",
+          "count": 0
         },
         {
           "id": 7384994864,
@@ -26,7 +27,8 @@
           "price": 39,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=腊味煲仔饭",
           "description": "",
-          "tag": "318569657"
+          "tag": "318569657",
+          "count": 0
         },
         {
           "id": 2305772036,
@@ -38,7 +40,8 @@
           "price": 34.32,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=鸡腿胡萝卜焖饭",
           "description": "主料：大米、鸡腿、菜心、胡萝卜",
-          "tag": "318569657"
+          "tag": "318569657",
+          "count": 0
         },
         {
           "id": 2233861812,
@@ -50,7 +53,8 @@
           "price": 34.32,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=小份酸汤莜面鱼鱼+肉夹馍套餐",
           "description": "酸汤莜面鱼鱼，主料：酸汤、莜面 肉夹馍，主料：白皮饼、猪肉",
-          "tag": "318569657"
+          "tag": "318569657",
+          "count": 0
         }
       ]
     },
@@ -68,7 +72,8 @@
           "price": 6,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=藤椒鸡肉串",
           "description": "1串。藤椒味，主料：鸡肉",
-          "tag": "82022594"
+          "tag": "82022594",
+          "count": 0
         },
         {
           "id": 6592009498,
@@ -80,7 +85,8 @@
           "price": 169,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=烤羊排",
           "description": "6-8个月草原羔羊肋排，烤到皮脆肉香",
-          "tag": "82022594"
+          "tag": "82022594",
+          "count": 0
         }
       ]
     },
@@ -98,7 +104,8 @@
           "price": 5,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=五常稻花香米饭",
           "description": "浓浓的稻米清香，软糯Q弹有嚼劲",
-          "tag": "98147100"
+          "tag": "98147100",
+          "count": 0
         },
         {
           "id": 740430262,
@@ -110,7 +117,8 @@
           "price": 13,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=小米发糕",
           "description": "柔软蓬松，葡萄干和蔓越莓酸甜适口",
-          "tag": "98147100"
+          "tag": "98147100",
+          "count": 0
         },
         {
           "id": 7466390504,
@@ -122,7 +130,8 @@
           "price": 13,
           "picture": "https://via.placeholder.com/300x300/FF0000/FFFFFF?text=沙枣玉米窝头",
           "description": "",
-          "tag": "98147100"
+          "tag": "98147100",
+          "count": 0
         }
       ]
     }
