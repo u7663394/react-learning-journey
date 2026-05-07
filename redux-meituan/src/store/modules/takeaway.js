@@ -29,10 +29,35 @@ const foodStore = createSlice({
         });
       }
     },
+    increaseCount(state, action) {
+      const item = state.cartList.find((ele) => ele.id === action.payload.id);
+      item.count += 1;
+    },
+    decreaseCount(state, action) {
+      const item = state.cartList.find((ele) => ele.id === action.payload.id);
+      if (item.count > 1) {
+        item.count -= 1;
+      } else {
+        // 数量为1再减，移除商品
+        state.cartList = state.cartList.filter(
+          (ele) => ele.id !== action.payload.id,
+        );
+      }
+    },
+    clearCart(state) {
+      state.cartList = [];
+    },
   },
 });
 
-const { setFoodsList, setActiveIndex, setCart } = foodStore.actions;
+const {
+  setFoodsList,
+  setActiveIndex,
+  setCart,
+  increaseCount,
+  decreaseCount,
+  clearCart,
+} = foodStore.actions;
 const takeawayReducer = foodStore.reducer;
 
 // 2. 异步请求数据
@@ -44,5 +69,12 @@ const fetchFoodsList = () => {
 };
 
 // 3. 导出 action 和 reducer
-export { fetchFoodsList, setActiveIndex, setCart };
+export {
+  fetchFoodsList,
+  setActiveIndex,
+  setCart,
+  increaseCount,
+  decreaseCount,
+  clearCart,
+};
 export default takeawayReducer;
