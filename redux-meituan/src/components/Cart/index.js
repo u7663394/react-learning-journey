@@ -7,6 +7,7 @@ import {
   increaseCount,
   clearCart,
 } from "../../store/modules/takeaway";
+import { useState } from "react";
 
 const Cart = () => {
   const { cartList } = useSelector((state) => state.foods);
@@ -19,11 +20,21 @@ const Cart = () => {
     return acc + item.price * item.count;
   }, 0);
 
+  /**
+   * 控制购物车面板显示与隐藏
+   */
+  const [visible, setVisible] = useState(false);
+
   return (
     <div className="cartContainer">
       {/* 遮罩层 添加visible类名可以显示出来 */}
-      <div className={classNames("cartOverlay")} />
-      <div className="cart">
+      <div
+        className={classNames("cartOverlay", {
+          visible: visible,
+        })}
+        onClick={() => setVisible(false)}
+      />
+      <div className="cart" onClick={() => setVisible(true)}>
         {/* fill 添加fill类名可以切换购物车状态*/}
         {/* 购物车数量 */}
         <div
@@ -53,11 +64,7 @@ const Cart = () => {
         )}
       </div>
       {/* 添加visible类名 div会显示出来 */}
-      <div
-        className={classNames("cartPanel", {
-          visible: cartList.length > 0,
-        })}
-      >
+      <div className={classNames("cartPanel", visible && "visible")}>
         <div className="header">
           <span className="text">购物车</span>
           <span className="clearCart" onClick={() => dispatch(clearCart())}>
