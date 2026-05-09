@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/login",
+    path: "/login/:letter?/:num?", // params 传递参数; ? 表示可选
     element: <Login />,
   },
 ]);
