@@ -4,10 +4,11 @@ import Layout from "../page/Layout";
 import About from "../page/About";
 import Board from "../page/Board";
 import NotFound from "../page/NotFound";
-// 路由
+// 路由 -> history 模式
 import { createBrowserRouter } from "react-router-dom";
 
 // 1. 创建路由对象
+// const router = createHashRouter([]); // hash 模式
 const router = createBrowserRouter([
   {
     path: "/",
