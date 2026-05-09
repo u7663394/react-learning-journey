@@ -3,6 +3,7 @@ import Home from "../page/Home";
 import Layout from "../page/Layout";
 import About from "../page/About";
 import Board from "../page/Board";
+import NotFound from "../page/NotFound";
 // 路由
 import { createBrowserRouter } from "react-router-dom";
 
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "board", element: <Board /> },
     ],
+  },
+  // Not Found 兜底路由
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
