@@ -1,5 +1,8 @@
 import Login from "../page/Login";
 import Home from "../page/Home";
+import Layout from "../page/Layout";
+import About from "../page/About";
+import Board from "../page/Board";
 // 路由
 import { createBrowserRouter } from "react-router-dom";
 
@@ -12,6 +15,15 @@ const router = createBrowserRouter([
   {
     path: "/login/:letter?/:num?", // params 传递参数; ? 表示可选
     element: <Login />,
+  },
+  {
+    path: "/layout",
+    element: <Layout />,
+    // 嵌套路由
+    children: [
+      { path: "about", element: <About /> },
+      { path: "board", element: <Board /> },
+    ],
   },
 ]);
 
