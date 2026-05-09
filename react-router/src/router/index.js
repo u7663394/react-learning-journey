@@ -21,6 +21,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     // 嵌套路由
     children: [
+      // index: true 默认子路由
+      { index: true, element: <About /> },
       { path: "about", element: <About /> },
       { path: "board", element: <Board /> },
     ],
