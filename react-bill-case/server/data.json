@@ -1,0 +1,81 @@
+{
+  "ka": [
+    {
+      "type": "pay",
+      "money": -99,
+      "date": "2024-06-01 10:36:43",
+      "useFor": "drinks",
+      "id": 1
+    },
+    {
+      "type": "pay",
+      "money": -199,
+      "date": "2024-06-02 12:20:15",
+      "useFor": "longdistance",
+      "id": 2
+    },
+    {
+      "type": "income",
+      "money": 500,
+      "date": "2024-06-03 09:00:00",
+      "useFor": "bonus",
+      "id": 3
+    },
+    {
+      "type": "pay",
+      "money": -50,
+      "date": "2024-06-04 14:45:30",
+      "useFor": "dessert",
+      "id": 4
+    },
+    {
+      "type": "income",
+      "money": -56,
+      "date": "2024-06-05 16:00:00",
+      "useFor": "drinks",
+      "id": 5
+    },
+    {
+      "type": "pay",
+      "money": -120,
+      "date": "2024-06-06 18:30:00",
+      "useFor": "groceries",
+      "id": 6
+    },
+    {
+      "type": "income",
+      "money": 300,
+      "date": "2024-06-07 11:15:00",
+      "useFor": "salary",
+      "id": 7
+    },
+    {
+      "type": "pay",
+      "money": -80,
+      "date": "2024-06-08 13:00:00",
+      "useFor": "transportation",
+      "id": 8
+    },
+    {
+      "type": "income",
+      "money": 150,
+      "date": "2024-06-09 10:00:00",
+      "useFor": "gift",
+      "id": 9
+    },
+    {
+      "type": "pay",
+      "money": -200,
+      "date": "2024-06-10 19:45:00",
+      "useFor": "entertainment",
+      "id": 10
+    },
+    {
+      "type": "pay",
+      "money": -400,
+      "date": "2024-06-11 08:30:00",
+      "useFor": "travel",
+      "id": 11
+    }
+  ]
+}
