@@ -10,9 +10,11 @@ const Month = () => {
   const [dateVisible, setDateVisible] = useState(false);
 
   /**
-   * 日期选择确认事件
+   * 日期选择确认
    */
-  const onConfirm = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const onConfirm = (date) => {
+    setCurrentDate(date);
     setDateVisible(false);
   };
 
@@ -25,7 +27,9 @@ const Month = () => {
         <div className="header">
           {/*时间切换区域 */}
           <div className="date" onClick={() => setDateVisible(true)}>
-            <span className="text">2026 | 3月账单</span>
+            <span className="text">
+              {currentDate.getFullYear()} | {currentDate.getMonth() + 1}月账单
+            </span>
             <span
               className={classNames("arrow", dateVisible && "expand")}
             ></span>
