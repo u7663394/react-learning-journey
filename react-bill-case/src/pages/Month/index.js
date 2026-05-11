@@ -13,13 +13,9 @@ const Month = () => {
   const [dateVisible, setDateVisible] = useState(false);
 
   /**
-   * 日期选择确认
+   * 当前选择日期
    */
   const [currentDate, setCurrentDate] = useState(new Date());
-  const onConfirm = (date) => {
-    setCurrentDate(date);
-    setDateVisible(false);
-  };
 
   /**
    * 账单列表按月分组
@@ -29,7 +25,37 @@ const Month = () => {
   const monthGroup = useMemo(() => {
     return _.groupBy(billList, (ele) => dayjs(ele.date).format("YYYY-MM"));
   }, [billList]);
-  console.log(monthGroup);
+
+  /**
+   * 获取当前月份的账单列表
+   */
+  const currentMonthList = useMemo(() => {
+    const formatDate = dayjs(currentDate).format("YYYY-MM");
+    return monthGroup[formatDate] || [];
+  }, [currentDate, monthGroup]);
+
+  /**
+   * 日期选择确认
+   */
+  const onConfirm = (date) => {
+    // 1. 回显选择日期
+    setCurrentDate(date);
+    // 2. 关闭弹框
+    setDateVisible(false);
+  };
+
+  /**
+   * 统计选择月份的收支金额
+   */
+  const monthResult = useMemo(() => {
+    const pay = currentMonthList
+      .filter((ele) => ele.type === "pay")
+      .reduce((a, c) => a + c.money, 0);
+    const income = currentMonthList
+      .filter((ele) => ele.type === "income")
+      .reduce((a, c) => a + c.money, 0);
+    return { pay, income, total: income + pay };
+  }, [currentMonthList]);
 
   return (
     <div className="monthlyBill">
@@ -50,15 +76,15 @@ const Month = () => {
           {/*统计区域 */}
           <div className="twoLineOverview">
             <div className="item">
-              <span className="money">{100}</span>
+              <span className="money">{monthResult.pay.toFixed(2)}</span>
               <span className="type">支出</span>
             </div>
             <div className="item">
-              <span className="money">{200}</span>
+              <span className="money">{monthResult.income.toFixed(2)}</span>
               <span className="type">收入</span>
             </div>
             <div className="item">
-              <span className="money">{300}</span>
+              <span className="money">{monthResult.total.toFixed(2)}</span>
               <span className="type">结余</span>
             </div>
           </div>
