@@ -1,0 +1,134 @@
+.dailyBill {
+  margin-bottom: 12px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+
+  .header {
+    --ka-text-color: #666;
+    background: none !important;
+    padding: 16px 15px 12px;
+
+    .dateIcon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+
+      .date {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .arrow {
+        width: 6px;
+        height: 6px;
+        border-top: 2px solid #999;
+        border-left: 2px solid #999;
+        transform: rotate(225deg);
+        transition: all 0.3s;
+      }
+
+      .arrow.expand {
+        transform: rotate(45deg);
+      }
+    }
+
+    .onLineOverview {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .pay,
+      .income,
+      .balance {
+        flex: 1;
+      }
+
+      .type {
+        font-size: 12px;
+        margin-right: 4px;
+      }
+
+      .money {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .pay {
+        .type {
+          color: #ff6b6b;
+        }
+      }
+
+      .income {
+        text-align: center;
+
+        .type {
+          color: #2f9e44;
+        }
+      }
+
+      .balance {
+        text-align: right;
+
+        .type {
+          color: #999;
+        }
+
+        .money {
+          font-size: 15px;
+          font-weight: 600;
+          color: #111;
+        }
+      }
+    }
+  }
+
+  .billList {
+    padding: 0 15px 10px;
+    border-top: 1px solid #f5f5f5;
+
+    .bill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #f7f7f7;
+      }
+    }
+
+    .billType {
+      font-size: 15px;
+      color: #333;
+    }
+
+    .money {
+      font-size: 16px;
+      font-weight: 500;
+
+      &.pay {
+        color: #ff7875;
+      }
+
+      &.income {
+        color: #52c41a;
+      }
+    }
+  }
+
+  &.expand {
+    .header {
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .billList {
+      display: block;
+    }
+  }
+}
