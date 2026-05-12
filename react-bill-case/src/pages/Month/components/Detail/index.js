@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import "./index.scss";
 import { useMemo, useState } from "react";
+import Icon from "@/icons";
 
 const DailyBill = ({ date, billList }) => {
   /**
@@ -51,6 +52,7 @@ const DailyBill = ({ date, billList }) => {
           {billList.map((item) => {
             return (
               <div className="bill" key={item.id}>
+                <Icon type={item.useFor} />
                 <div className="detail">
                   <div className="billType">{item.useFor}</div>
                 </div>
