@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import "./index.scss";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const DailyBill = ({ date, billList }) => {
   /**
@@ -16,12 +16,20 @@ const DailyBill = ({ date, billList }) => {
     return { pay, income, total: income + pay };
   }, [billList]);
 
+  /**
+   * 控制展开状态 + 箭头旋转
+   */
+  const [visible, setVisible] = useState(false);
+
   return (
     <div className={classNames("dailyBill")}>
       <div className="header">
         <div className="dateIcon">
           <span className="date"> {date}</span>
-          <span className={classNames("arrow")}></span>
+          <span
+            onClick={() => setVisible(!visible)}
+            className={classNames("arrow", { expand: visible })}
+          ></span>
         </div>
         <div className="onLineOverview">
           <div className="pay">
@@ -38,20 +46,22 @@ const DailyBill = ({ date, billList }) => {
           </div>
         </div>
       </div>
-      <div className="billList">
-        {billList.map((item) => {
-          return (
-            <div className="bill" key={item.id}>
-              <div className="detail">
-                <div className="billType">{item.useFor}</div>
+      {visible && (
+        <div className="billList">
+          {billList.map((item) => {
+            return (
+              <div className="bill" key={item.id}>
+                <div className="detail">
+                  <div className="billType">{item.useFor}</div>
+                </div>
+                <div className={classNames("money", item.type)}>
+                  {item.money.toFixed(2)}
+                </div>
               </div>
-              <div className={classNames("money", item.type)}>
-                {item.money.toFixed(2)}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
