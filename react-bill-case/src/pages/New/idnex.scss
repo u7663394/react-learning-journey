@@ -1,0 +1,275 @@
+.keepAccounts {
+  --ka-bg-color: #daf2e1;
+  --ka-color: #69ae78;
+  --ka-deep-color: #3f8f54;
+  --ka-card-color: #ffffff;
+  --ka-text-color: #121826;
+  --ka-sub-text-color: #7b8794;
+  --ka-border-color: rgba(25, 29, 38, 0.08);
+  --ka-shadow: 0 12px 30px rgba(63, 143, 84, 0.14);
+
+  min-height: 100%;
+  padding-bottom: 88px;
+  background:
+    radial-gradient(
+      circle at 12% 0%,
+      rgba(255, 255, 255, 0.75),
+      transparent 26%
+    ),
+    linear-gradient(180deg, #daf2e1 0%, #f6fbf7 46%, #f7f8fa 100%);
+  color: var(--ka-text-color);
+
+  .nav {
+    --adm-font-size-10: 16px;
+
+    height: 48px;
+    color: var(--ka-text-color);
+    background-color: transparent;
+    font-weight: 700;
+
+    &::after {
+      height: 0;
+    }
+
+    .adm-nav-bar-back-arrow {
+      font-size: 22px;
+      color: var(--ka-text-color);
+    }
+  }
+
+  .header {
+    height: 176px;
+    padding: 0 18px;
+
+    .kaType {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 0 16px;
+      text-align: center;
+
+      .adm-button {
+        --adm-font-size-9: 14px;
+        --border-width: 0;
+        --background-color: rgba(255, 255, 255, 0.62);
+        --text-color: var(--ka-sub-text-color);
+
+        min-width: 78px;
+        height: 34px;
+        padding: 0 18px;
+        border-radius: 999px;
+        font-weight: 600;
+        box-shadow: 0 8px 18px rgba(83, 120, 93, 0.1);
+        backdrop-filter: blur(8px);
+
+        &.selected {
+          --background-color: var(--ka-color);
+          --text-color: #ffffff;
+
+          box-shadow: 0 10px 22px rgba(105, 174, 120, 0.34);
+        }
+      }
+    }
+
+    .kaFormWrapper {
+      padding: 4px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.46);
+      box-shadow: var(--ka-shadow);
+      backdrop-filter: blur(10px);
+
+      .kaForm {
+        position: relative;
+        min-height: 118px;
+        padding: 18px 18px 16px;
+        border-radius: 22px;
+        background: var(--ka-card-color);
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          right: -34px;
+          top: -42px;
+          width: 116px;
+          height: 116px;
+          border-radius: 50%;
+          background: rgba(105, 174, 120, 0.12);
+        }
+
+        .date {
+          position: relative;
+          z-index: 1;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          height: 34px;
+          padding: 0 12px;
+          border-radius: 999px;
+          background: #f4faf6;
+          color: var(--ka-deep-color);
+          font-size: 13px;
+          font-weight: 600;
+
+          .icon {
+            font-size: 16px;
+          }
+
+          .text {
+            line-height: 1;
+          }
+
+          .kaDate {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+          }
+        }
+
+        .kaInput {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: flex-end;
+          margin-top: 16px;
+
+          .input {
+            --font-size: 36px;
+            --color: var(--ka-text-color);
+            --placeholder-color: #c2c9d1;
+
+            flex: 1;
+            height: 46px;
+            font-weight: 800;
+          }
+
+          .iconYuan {
+            order: -1;
+            margin-right: 10px;
+            padding-bottom: 6px;
+            color: var(--ka-text-color);
+            font-size: 24px;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+  }
+
+  .kaTypeList {
+    margin-top: 18px;
+    padding: 0 18px 24px;
+
+    > .kaType {
+      margin-bottom: 18px;
+      padding: 18px 16px 16px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 24px rgba(33, 45, 38, 0.06);
+
+      .title {
+        margin-bottom: 14px;
+        color: var(--ka-text-color);
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 18px;
+
+        .item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+
+          .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 18px;
+            background: #f3f7f4;
+            color: var(--ka-color);
+            font-size: 24px;
+            transition: all 0.2s ease;
+          }
+
+          .text {
+            max-width: 64px;
+            color: #59636f;
+            font-size: 12px;
+            line-height: 1.25;
+            text-align: center;
+          }
+
+          &.selected {
+            .icon {
+              background: var(--ka-color);
+              color: #ffffff;
+              box-shadow: 0 10px 20px rgba(105, 174, 120, 0.32);
+              transform: translateY(-2px);
+            }
+
+            .text {
+              color: var(--ka-deep-color);
+              font-weight: 700;
+            }
+          }
+
+          &:active {
+            .icon {
+              transform: scale(0.94);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btns {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    padding: 14px 18px calc(14px + env(safe-area-inset-bottom));
+    text-align: center;
+    background: linear-gradient(
+      180deg,
+      rgba(247, 248, 250, 0),
+      rgba(247, 248, 250, 0.96) 32%,
+      #f7f8fa 100%
+    );
+
+    .btn {
+      width: 100%;
+      max-width: 320px;
+      height: 46px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 800;
+      --border-width: 0;
+      --background-color: #ffffff;
+      --text-color: #616161;
+
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+
+    .btn.save {
+      --background-color: var(--ka-color);
+      --text-color: #ffffff;
+
+      box-shadow: 0 12px 24px rgba(105, 174, 120, 0.34);
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
