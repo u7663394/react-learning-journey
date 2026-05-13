@@ -6,6 +6,7 @@ import "./idnex.scss";
 import { useState } from "react";
 import { addBillList } from "@/store/modules/billStore";
 import { useDispatch } from "react-redux";
+import dayjs from "dayjs";
 
 const New = () => {
   const billListData = {
@@ -97,11 +98,23 @@ const New = () => {
     const data = {
       type: billType,
       money: billType === "pay" ? -money : +money,
-      date: new Date(),
+      date: selectDate,
       useFor: useFor,
     };
     // 2. 提交 action
     dispatch(addBillList(data));
+    // 3. 提示
+    alert("保存成功");
+  };
+
+  /**
+   * 日期选择器
+   */
+  const [dateVisible, setDateVisible] = useState(false);
+  const [selectDate, setSelectDate] = useState(new Date());
+  const dateConfirm = (date) => {
+    setSelectDate(date);
+    setDateVisible(false);
   };
 
   return (
@@ -132,11 +145,20 @@ const New = () => {
           <div className="kaForm">
             <div className="date">
               <Icon type="calendar" className="icon" />
-              <span className="text"> {"Today"}</span>
+              <span
+                onClick={() => {
+                  setDateVisible(true);
+                }}
+                className="text"
+              >
+                {dayjs(selectDate).format("YYYY-MM-DD")}
+              </span>
               <DatePicker
                 className="kaDate"
                 title="记账日期"
                 max={new Date()}
+                visible={dateVisible}
+                onConfirm={dateConfirm}
               />
             </div>
             <div className="kaInput">
@@ -163,7 +185,10 @@ const New = () => {
                   return (
                     <div
                       onClick={() => setUseFor(item.type)}
-                      className={classNames("item", "")}
+                      className={classNames(
+                        "item",
+                        useFor === item.type ? "selected" : "",
+                      )}
                       key={item.type}
                     >
                       <div className="icon">

@@ -181,6 +181,62 @@
       "date": "2026-05-13T05:18:42.681Z",
       "useFor": "drinks",
       "id": "-RZLXLPDsIA"
+    },
+    {
+      "type": "pay",
+      "money": 0,
+      "date": "2026-04-12T14:00:00.000Z",
+      "useFor": "",
+      "id": "TepKq0Qoh7g"
+    },
+    {
+      "type": "income",
+      "money": 666,
+      "date": "2026-05-11T14:00:00.000Z",
+      "useFor": "salary",
+      "id": "xZCOQVhUyyw"
+    },
+    {
+      "type": "pay",
+      "money": -333,
+      "date": "2026-05-11T14:00:00.000Z",
+      "useFor": "food",
+      "id": "d1-lBXXEwyI"
+    },
+    {
+      "type": "pay",
+      "money": -12,
+      "date": "2026-05-09T14:00:00.000Z",
+      "useFor": "taxi",
+      "id": "DeY8vwoig40"
+    },
+    {
+      "type": "pay",
+      "money": -12,
+      "date": "2026-05-09T14:00:00.000Z",
+      "useFor": "taxi",
+      "id": "9FPnTcRZbOw"
+    },
+    {
+      "type": "pay",
+      "money": -12,
+      "date": "2026-05-09T14:00:00.000Z",
+      "useFor": "taxi",
+      "id": "au6wz4nfRW8"
+    },
+    {
+      "type": "pay",
+      "money": -12,
+      "date": "2026-05-09T14:00:00.000Z",
+      "useFor": "taxi",
+      "id": "Iqew4UxD6v8"
+    },
+    {
+      "type": "pay",
+      "money": -12,
+      "date": "2026-05-09T14:00:00.000Z",
+      "useFor": "taxi",
+      "id": "eg4meL9MS_Q"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
