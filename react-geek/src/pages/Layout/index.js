@@ -6,7 +6,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const { Header, Sider } = Layout;
 
@@ -37,6 +37,14 @@ const GeekLayout = () => {
     navigate(e.key);
   };
 
+  /**
+   * 根据路径高亮菜单
+   *   1. 获取当前路径 -> useLocation
+   *   2. selectedKeys 绑定到 Menu 上
+   */
+  const location = useLocation();
+  const selectedKey = location.pathname;
+
   return (
     <Layout>
       <Header className="header">
@@ -53,6 +61,7 @@ const GeekLayout = () => {
       <Layout>
         <Sider width={200} className="site-layout-background">
           <Menu
+            selectedKeys={selectedKey}
             onClick={onMenuClick}
             mode="inline"
             theme="dark"
