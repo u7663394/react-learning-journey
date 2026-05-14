@@ -1,7 +1,27 @@
+import "./index.scss";
+import { Card, Form, Input, Button } from "antd";
+import logo from "@/assets/logo.png";
+
 const Login = () => {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login">
+      <Card className="login-container">
+        <img className="login-logo" src={logo} alt="" />
+        {/* 登录表单 */}
+        <Form validateTrigger="onBlur">
+          <Form.Item name="mobile">
+            <Input size="large" placeholder="Please enter your mobile number" />
+          </Form.Item>
+          <Form.Item name="code">
+            <Input size="large" placeholder="Please enter verification code" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" size="large" block>
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };
