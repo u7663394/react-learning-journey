@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
   margin: 0;
   height: 100%;
   background: #f5f7fb;
@@ -96,18 +97,14 @@ body {
 }
 
 .layout-content {
-  padding: 20px;
+  padding: 20px !important;
+  margin: 20px;
   overflow-y: auto;
-  background: #f5f7fb;
-
-  &::before {
-    content: "";
-    display: block;
-    min-height: calc(100vh - 104px);
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-  }
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  min-height: calc(100vh - 104px);
+  box-sizing: border-box;
 }
 
 .ant-layout-header {
