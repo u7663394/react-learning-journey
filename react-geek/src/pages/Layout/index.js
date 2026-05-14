@@ -9,23 +9,23 @@ import "./index.scss";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo } from "@/store/modules/userStore";
+import { clearAll, fetchUserInfo } from "@/store/modules/userStore";
 
 const { Header, Sider } = Layout;
 
 const items = [
   {
-    label: "首页",
+    label: "Home",
     key: "/",
     icon: <HomeOutlined />,
   },
   {
-    label: "文章管理",
+    label: "Manage Article",
     key: "/article",
     icon: <DiffOutlined />,
   },
   {
-    label: "创建文章",
+    label: "Publish Article",
     key: "/publish",
     icon: <EditOutlined />,
   },
@@ -58,6 +58,16 @@ const GeekLayout = () => {
 
   const userInfo = useSelector((state) => state.user.userInfo);
 
+  /**
+   * 退出登录
+   *   1. 删除 token 与 userInfo
+   *   2. 跳转到登录页
+   */
+  const onConfirm = () => {
+    dispatch(clearAll());
+    navigate("/login");
+  };
+
   return (
     <Layout>
       <Header className="header">
@@ -65,8 +75,13 @@ const GeekLayout = () => {
         <div className="user-info">
           <span className="user-name">{userInfo.name}</span>
           <span className="user-logout">
-            <Popconfirm title="是否确认退出？" okText="退出" cancelText="取消">
-              <LogoutOutlined /> 退出
+            <Popconfirm
+              title="Are you sure to logout?"
+              okText="Logout"
+              cancelText="Cancel"
+              onConfirm={onConfirm}
+            >
+              <LogoutOutlined /> Logout
             </Popconfirm>
           </span>
         </div>
