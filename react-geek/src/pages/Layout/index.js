@@ -6,7 +6,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Sider } = Layout;
 
@@ -29,6 +29,14 @@ const items = [
 ];
 
 const GeekLayout = () => {
+  /**
+   * 菜单点击跳转
+   */
+  const navigate = useNavigate();
+  const onMenuClick = (e) => {
+    navigate(e.key);
+  };
+
   return (
     <Layout>
       <Header className="header">
@@ -45,6 +53,7 @@ const GeekLayout = () => {
       <Layout>
         <Sider width={200} className="site-layout-background">
           <Menu
+            onClick={onMenuClick}
             mode="inline"
             theme="dark"
             items={items}
