@@ -1,5 +1,8 @@
 import axios from "axios";
 import { getToken } from "./token";
+import { clearAll } from "@/store/modules/userStore";
+import { message } from "antd";
+import router from "@/router";
 
 // 封装 axios 实例
 const request = axios.create({
@@ -27,7 +30,14 @@ request.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    return Promise.reject(error);
+    // 401 token 过期或无效
+    if (error.response?.status === 401) {
+      clearAll();
+      router.navigate("/login");
+      return message.error("Login expired, please login again");
+    } else {
+      return Promise.reject(error);
+    }
   },
 );
 
