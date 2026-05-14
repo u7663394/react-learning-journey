@@ -21,12 +21,19 @@ const Login = () => {
     { required: true, message: "Please enter verification code" },
   ];
 
+  /**
+   * 收集表单数据
+   */
+  const onFinish = (values) => {
+    console.log(values);
+  };
+
   return (
     <div className="login">
       <Card className="login-container">
         <img className="login-logo" src={logo} alt="" />
         {/* 登录表单 */}
-        <Form validateTrigger="onBlur">
+        <Form validateTrigger="onBlur" onFinish={onFinish}>
           <Form.Item name="mobile" rules={mobileRules}>
             <Input size="large" placeholder="Please enter your mobile number" />
           </Form.Item>
