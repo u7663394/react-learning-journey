@@ -3,7 +3,7 @@ import axios from "axios";
 // 封装 axios 实例
 const request = axios.create({
   baseURL: "http://geek.itheima.net/v1_0",
-  timeout: 10000,
+  timeout: 15000,
 });
 
 // 请求拦截器

@@ -1,6 +1,8 @@
 import "./index.scss";
 import { Card, Form, Input, Button } from "antd";
 import logo from "@/assets/logo.png";
+import { useDispatch } from "react-redux";
+import { fetchToken } from "@/store/modules/userStore";
 
 const Login = () => {
   /**
@@ -22,10 +24,19 @@ const Login = () => {
   ];
 
   /**
-   * 收集表单数据
+   * 表单默认值 - 测试用
    */
+  const initialValues = {
+    mobile: "13800000002",
+    code: "246810",
+  };
+
+  /**
+   * 收集表单数据 + 触发登录请求
+   */
+  const dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log(values);
+    dispatch(fetchToken(values));
   };
 
   return (
@@ -33,7 +44,11 @@ const Login = () => {
       <Card className="login-container">
         <img className="login-logo" src={logo} alt="" />
         {/* 登录表单 */}
-        <Form validateTrigger="onBlur" onFinish={onFinish}>
+        <Form
+          validateTrigger="onBlur"
+          onFinish={onFinish}
+          initialValues={initialValues}
+        >
           <Form.Item name="mobile" rules={mobileRules}>
             <Input size="large" placeholder="Please enter your mobile number" />
           </Form.Item>
