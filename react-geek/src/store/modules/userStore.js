@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import request from "@/utils/request";
 import { getToken, removeToken, setLocalToken } from "@/utils/token";
+import { loginAPI, getUserInfoAPI } from "@/apis/user";
 
 // user 子仓库
 const userStore = createSlice({
@@ -28,7 +28,7 @@ const userStore = createSlice({
 // 异步获取 token
 const fetchToken = (loginForm) => {
   return async (dispatch) => {
-    const res = await request.post("/authorizations", loginForm);
+    const res = await loginAPI(loginForm);
     const token = res.data.token;
     dispatch(setToken(token));
   };
@@ -37,7 +37,7 @@ const fetchToken = (loginForm) => {
 // 异步获取用户信息
 const fetchUserInfo = () => {
   return async (dispatch) => {
-    const res = await request.get("/user/profile");
+    const res = await getUserInfoAPI();
     dispatch(setUserInfo(res.data));
   };
 };
