@@ -1,8 +1,9 @@
 import "./index.scss";
-import { Card, Form, Input, Button } from "antd";
+import { Card, Form, Input, Button, message } from "antd";
 import logo from "@/assets/logo.png";
 import { useDispatch } from "react-redux";
 import { fetchToken } from "@/store/modules/userStore";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   /**
@@ -32,11 +33,20 @@ const Login = () => {
   };
 
   /**
-   * 收集表单数据 + 触发登录请求
+   * 登录逻辑:
+   *   1. 收集表单数据 + 触发登录请求
+   *   2. 跳转到首页
+   *   3. 提示
    */
   const dispatch = useDispatch();
-  const onFinish = (values) => {
-    dispatch(fetchToken(values));
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    // 1. 收集数据 + 触发登录请求
+    await dispatch(fetchToken(values));
+    // 2. 跳转到首页
+    navigate("/");
+    // 3. 提示
+    message.success("Login successful!");
   };
 
   return (
