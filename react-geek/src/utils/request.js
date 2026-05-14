@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "./token";
 
 // 封装 axios 实例
 const request = axios.create({
@@ -6,9 +7,13 @@ const request = axios.create({
   timeout: 15000,
 });
 
-// 请求拦截器
+// 请求拦截器: 统一携带 token
 request.interceptors.request.use(
   (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
