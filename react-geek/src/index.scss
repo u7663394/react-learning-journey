@@ -1,7 +1,9 @@
+html,
 body {
-  background-color: rgb(255, 236, 239);
-  
-  div {
-    color: skyblue;
-  }
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
