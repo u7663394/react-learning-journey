@@ -16,7 +16,7 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
 import { useEffect, useState } from "react";
-import { getChannelsAPI } from "@/apis/article";
+import { getChannelsAPI, publishArticleAPI } from "@/apis/article";
 
 const Publish = () => {
   /**
@@ -30,6 +30,24 @@ const Publish = () => {
     };
     fetchChannels();
   }, []);
+
+  /**
+   * 提交表单
+   */
+  const onFinish = async (formData) => {
+    // 1. 按照接口要求，处理数据
+    const { title, content, channel_id } = formData;
+    const requireData = {
+      title: title,
+      content: content,
+      cover: { type: 0, images: [] },
+      channel_id: channel_id,
+    };
+    // 2. 调用发布接口
+    await publishArticleAPI(requireData);
+    // 3. 提示
+    message.success("Article published successfully!");
+  };
 
   return (
     <div className="publish">
@@ -47,6 +65,7 @@ const Publish = () => {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ type: 0 }}
+          onFinish={onFinish}
         >
           <Form.Item
             label="Title"
@@ -79,7 +98,7 @@ const Publish = () => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item label="Cover">
+          {/* <Form.Item label="Cover">
             <Form.Item name="type">
               <Radio.Group>
                 <Radio value={1}>Single Image</Radio>
@@ -87,11 +106,7 @@ const Publish = () => {
                 <Radio value={0}>No Image</Radio>
               </Radio.Group>
             </Form.Item>
-            {/* 
-              listType: 决定选择文件框的外观样式
-              showUploadList: 控制显示上传列表
-            */}
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             label="Content"
             name="content"

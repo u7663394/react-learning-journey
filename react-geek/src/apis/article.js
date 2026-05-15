@@ -8,3 +8,12 @@ export const getChannelsAPI = () => {
     url: "/channels",
   });
 };
+
+// 2. 发布文章
+export const publishArticleAPI = (data) => {
+  return request({
+    method: "POST",
+    url: "/mp/articles?draft=false",
+    data,
+  });
+};
