@@ -12,6 +12,8 @@ import {
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
 
 const Publish = () => {
@@ -21,8 +23,8 @@ const Publish = () => {
         title={
           <Breadcrumb
             items={[
-              { title: <Link to={"/"}>首页</Link> },
-              { title: "发布文章" },
+              { title: <Link to={"/"}>Home</Link> },
+              { title: "Publish Article" },
             ]}
           />
         }
@@ -33,27 +35,37 @@ const Publish = () => {
           initialValues={{ type: 0 }}
         >
           <Form.Item
-            label="标题"
+            label="Title"
             name="title"
-            rules={[{ required: true, message: "请输入文章标题" }]}
+            rules={[
+              { required: true, message: "Please enter the article title" },
+            ]}
           >
-            <Input placeholder="请输入文章标题" style={{ width: 400 }} />
+            <Input
+              placeholder="Please enter the article title"
+              style={{ width: 400 }}
+            />
           </Form.Item>
           <Form.Item
-            label="频道"
+            label="Channel"
             name="channel_id"
-            rules={[{ required: true, message: "请选择文章频道" }]}
+            rules={[
+              { required: true, message: "Please select the article channel" },
+            ]}
           >
-            <Select placeholder="请选择文章频道" style={{ width: 400 }}>
+            <Select
+              placeholder="Please select the article channel"
+              style={{ width: 400 }}
+            >
               {/* value属性用户选中之后会自动收集起来作为接口的提交字段 */}
             </Select>
           </Form.Item>
-          <Form.Item label="封面">
+          <Form.Item label="Cover">
             <Form.Item name="type">
               <Radio.Group>
-                <Radio value={1}>单图</Radio>
-                <Radio value={3}>三图</Radio>
-                <Radio value={0}>无图</Radio>
+                <Radio value={1}>Single Image</Radio>
+                <Radio value={3}>Three Images</Radio>
+                <Radio value={0}>No Image</Radio>
               </Radio.Group>
             </Form.Item>
             {/* 
@@ -62,16 +74,23 @@ const Publish = () => {
             */}
           </Form.Item>
           <Form.Item
-            label="内容"
+            label="Content"
             name="content"
-            rules={[{ required: true, message: "请输入文章内容" }]}
+            rules={[
+              { required: true, message: "Please enter the article content" },
+            ]}
           >
             {/* 富文本编辑器 */}
+            <ReactQuill
+              theme="snow"
+              className="publish-quill"
+              placeholder="Please enter the article content"
+            />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
               <Button size="large" type="primary" htmlType="submit">
-                发布文章
+                Publish Article
               </Button>
             </Space>
           </Form.Item>
