@@ -15,8 +15,22 @@ import { Link } from "react-router-dom";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
+import { useEffect, useState } from "react";
+import { getChannelsAPI } from "@/apis/article";
 
 const Publish = () => {
+  /**
+   * 频道列表
+   */
+  const [channelList, setChannelList] = useState([]);
+  useEffect(() => {
+    const fetchChannels = async () => {
+      const res = await getChannelsAPI();
+      setChannelList(res.data.channels);
+    };
+    fetchChannels();
+  }, []);
+
   return (
     <div className="publish">
       <Card
@@ -57,7 +71,12 @@ const Publish = () => {
               placeholder="Please select the article channel"
               style={{ width: 400 }}
             >
-              {/* value属性用户选中之后会自动收集起来作为接口的提交字段 */}
+              {channelList.map((ele) => (
+                // value 会被收集起来 -> 提交时使用
+                <Select.Option key={ele.id} value={ele.id}>
+                  {ele.name}
+                </Select.Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item label="Cover">
