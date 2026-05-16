@@ -49,6 +49,14 @@ const Publish = () => {
     message.success("Article published successfully!");
   };
 
+  /**
+   * 上传图片
+   */
+  const [fileList, setFileList] = useState([]);
+  const onUploadImg = (info) => {
+    setFileList(info.fileList);
+  };
+
   return (
     <div className="publish">
       <Card
@@ -98,7 +106,7 @@ const Publish = () => {
               ))}
             </Select>
           </Form.Item>
-          {/* <Form.Item label="Cover">
+          <Form.Item label="Cover">
             <Form.Item name="type">
               <Radio.Group>
                 <Radio value={1}>Single Image</Radio>
@@ -106,7 +114,25 @@ const Publish = () => {
                 <Radio value={0}>No Image</Radio>
               </Radio.Group>
             </Form.Item>
-          </Form.Item> */}
+            {/* 
+              listType 决定上传组件的显示样式
+              showUploadList 显示已上传的文件列表, 默认为 true
+              action 上传的地址
+              name 上传文件的字段名, 后端决定
+              onChange 文件状态改变时的回调函数
+             */}
+            <Upload
+              listType="picture-card"
+              showUploadList
+              action={"http://geek.itheima.net/v1_0/upload"}
+              name="image"
+              onChange={onUploadImg}
+            >
+              <div style={{ marginTop: 8 }}>
+                <PlusOutlined />
+              </div>
+            </Upload>
+          </Form.Item>
           <Form.Item
             label="Content"
             name="content"
