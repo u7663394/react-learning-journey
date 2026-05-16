@@ -89,7 +89,18 @@ const Publish = () => {
     const fetchArticleDetail = async () => {
       const res = await getArticleDetailAPI(articleId);
       // 3. 将数据回显到表单中 -> setFieldsValue
-      form.setFieldsValue(res.data);
+      const { cover } = res.data;
+      setImageType(cover.type);
+      setShowUpload(cover.type !== 0);
+      setFileList(
+        cover.images.map((url) => {
+          return { url };
+        }),
+      );
+      form.setFieldsValue({
+        ...res.data,
+        type: cover.type,
+      });
     };
     if (articleId) fetchArticleDetail();
   }, [articleId]);
@@ -167,6 +178,7 @@ const Publish = () => {
                 name="image"
                 onChange={onUploadImg}
                 maxCount={maxCount}
+                fileList={fileList}
               >
                 <div style={{ marginTop: 8 }}>
                   <PlusOutlined />
@@ -191,7 +203,7 @@ const Publish = () => {
           <Form.Item wrapperCol={{ offset: 4 }}>
             <Space>
               <Button size="large" type="primary" htmlType="submit">
-                Publish Article
+                {articleId ? "Update Article" : "Publish Article"}
               </Button>
             </Space>
           </Form.Item>
