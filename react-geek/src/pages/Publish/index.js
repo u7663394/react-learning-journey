@@ -57,6 +57,18 @@ const Publish = () => {
     setFileList(info.fileList);
   };
 
+  /**
+   * 选择封面类型
+   */
+  const [showUpload, setShowUpload] = useState(false);
+  const onTypeSelect = (e) => {
+    if (e.target.value === 0) {
+      setShowUpload(false);
+    } else {
+      setShowUpload(true);
+    }
+  };
+
   return (
     <div className="publish">
       <Card
@@ -108,7 +120,7 @@ const Publish = () => {
           </Form.Item>
           <Form.Item label="Cover">
             <Form.Item name="type">
-              <Radio.Group>
+              <Radio.Group onChange={onTypeSelect}>
                 <Radio value={1}>Single Image</Radio>
                 <Radio value={3}>Three Images</Radio>
                 <Radio value={0}>No Image</Radio>
@@ -121,17 +133,19 @@ const Publish = () => {
               name 上传文件的字段名, 后端决定
               onChange 文件状态改变时的回调函数
              */}
-            <Upload
-              listType="picture-card"
-              showUploadList
-              action={"http://geek.itheima.net/v1_0/upload"}
-              name="image"
-              onChange={onUploadImg}
-            >
-              <div style={{ marginTop: 8 }}>
-                <PlusOutlined />
-              </div>
-            </Upload>
+            {showUpload && (
+              <Upload
+                listType="picture-card"
+                showUploadList
+                action={"http://geek.itheima.net/v1_0/upload"}
+                name="image"
+                onChange={onUploadImg}
+              >
+                <div style={{ marginTop: 8 }}>
+                  <PlusOutlined />
+                </div>
+              </Upload>
+            )}
           </Form.Item>
           <Form.Item
             label="Content"
