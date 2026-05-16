@@ -11,12 +11,13 @@ import {
   Table,
   Tag,
   Space,
+  message,
 } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import img404 from "@/assets/error.png";
 import { useChannel } from "@/hooks/useChannel";
 import { useEffect, useState } from "react";
-import { getArticleListAPI } from "@/apis/article";
+import { deleteArticleAPI, getArticleListAPI } from "@/apis/article";
 
 const Article = () => {
   /**
@@ -129,7 +130,7 @@ const Article = () => {
             <Popconfirm
               title="Delete Article"
               description="Are you sure you want to delete the current article?"
-              // onConfirm={() => onConfirm(data)}
+              onConfirm={() => onConfirm(data)}
               okText="Yes"
               cancelText="No"
             >
@@ -145,6 +146,18 @@ const Article = () => {
       },
     },
   ];
+
+  /**
+   * 删除文章
+   *   1. 调用删除接口
+   *   2. 提示删除成功
+   *   3. 重新获取文章列表数据 -> useEffect, 依赖 reqData
+   */
+  const onConfirm = async (data) => {
+    const res = await deleteArticleAPI(data.id);
+    message.success(res.message);
+    setReqData({ ...reqData });
+  };
 
   /**
    * 分页功能

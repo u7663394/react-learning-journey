@@ -26,3 +26,11 @@ export const getArticleListAPI = (params) => {
     params,
   });
 };
+
+// 4. 删除文章
+export const deleteArticleAPI = (id) => {
+  return request({
+    method: "DELETE",
+    url: `/mp/articles/${id}`,
+  });
+};
