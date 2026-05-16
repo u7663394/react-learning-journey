@@ -20,6 +20,35 @@ import { getArticleListAPI } from "@/apis/article";
 
 const Article = () => {
   /**
+   * 筛选功能
+   */
+  // 1. 准备完整的请求参数
+  const [reqData, setReqData] = useState({
+    status: "",
+    channel_id: "",
+    begin_pubdate: "",
+    end_pubdate: "",
+    page: 1,
+    per_page: 10,
+  });
+  // 2. 获取当前表单数据 -> onFinish
+  const onFinish = (formValues) => {
+    // 3. 表单数据放入请求参数中
+    setReqData({
+      ...reqData,
+      channel_id: formValues.channel_id,
+      status: formValues.status,
+      begin_pubdate: formValues.date
+        ? formValues.date[0].format("YYYY-MM-DD")
+        : "",
+      end_pubdate: formValues.date
+        ? formValues.date[1].format("YYYY-MM-DD")
+        : "",
+    });
+    // 4. 重新调用接口函数 -> useEffect, 依赖 reqData
+  };
+
+  /**
    * 获取 channelList 数据
    */
   const { channelList } = useChannel();
@@ -31,12 +60,12 @@ const Article = () => {
   const [articleList, setArticleList] = useState([]);
   useEffect(() => {
     const fetchArticleList = async () => {
-      const res = await getArticleListAPI();
+      const res = await getArticleListAPI(reqData);
       setArticleList(res.data.results);
       setCount(res.data.total_count);
     };
     fetchArticleList();
-  }, []);
+  }, [reqData]);
 
   /**
    * 适配文章状态: 枚举渲染
@@ -130,7 +159,7 @@ const Article = () => {
         }
         style={{ marginBottom: 20 }}
       >
-        <Form initialValues={{ status: "" }}>
+        <Form onFinish={onFinish} initialValues={{ status: "" }}>
           <Form.Item label="Status" name="status">
             <Radio.Group>
               <Radio value={""}>All</Radio>
