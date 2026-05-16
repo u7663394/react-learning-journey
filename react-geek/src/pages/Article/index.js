@@ -146,6 +146,13 @@ const Article = () => {
     },
   ];
 
+  /**
+   * 分页功能
+   */
+  const onPageChange = (page, pageSize) => {
+    setReqData({ ...reqData, page, per_page: pageSize });
+  };
+
   return (
     <div>
       <Card
@@ -197,8 +204,9 @@ const Article = () => {
           dataSource={articleList}
           pagination={{
             total: count,
-            // pageSize: reqData.per_page,
-            // onChange: onPageChange,
+            pageSize: reqData.per_page,
+            onChange: onPageChange,
+            pageSizeOptions: ["5", "10", "15", "20"],
           }}
         />
       </Card>
