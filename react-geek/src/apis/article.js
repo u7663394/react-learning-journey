@@ -42,3 +42,12 @@ export const getArticleDetailAPI = (id) => {
     url: `/mp/articles/${id}`,
   });
 };
+
+// 6. 更新文章
+export const updateArticleAPI = (data) => {
+  return request({
+    method: "PUT",
+    url: `/mp/articles/${data.id}?draft=false`,
+    data,
+  });
+};

@@ -16,7 +16,11 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
 import { useEffect, useState } from "react";
-import { getArticleDetailAPI, publishArticleAPI } from "@/apis/article";
+import {
+  getArticleDetailAPI,
+  publishArticleAPI,
+  updateArticleAPI,
+} from "@/apis/article";
 import { useChannel } from "@/hooks/useChannel";
 
 const Publish = () => {
@@ -40,14 +44,20 @@ const Publish = () => {
       content: content,
       cover: {
         type: imageType,
-        images: fileList.map((ele) => ele.response.data.url),
+        images: fileList.map((ele) => {
+          return ele.response ? ele.response.data.url : ele.url;
+        }),
       },
       channel_id: channel_id,
     };
-    // 2. 调用发布接口
-    await publishArticleAPI(requireData);
+    // 2. 调用发布 / 更新接口
+    articleId
+      ? await updateArticleAPI({ ...requireData, id: articleId })
+      : await publishArticleAPI(requireData);
     // 3. 提示
-    message.success("Article published successfully!");
+    articleId
+      ? message.success("Article updated successfully!")
+      : message.success("Article published successfully!");
   };
 
   /**
