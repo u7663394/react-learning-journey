@@ -59,13 +59,18 @@ const Publish = () => {
 
   /**
    * 选择封面类型
+   *   1. 控制上传组件的显示和隐藏
+   *   2. 限制上传图片的数量
    */
   const [showUpload, setShowUpload] = useState(false);
+  const [maxCount, setMaxCount] = useState(0);
   const onTypeSelect = (e) => {
     if (e.target.value === 0) {
       setShowUpload(false);
+      setMaxCount(0);
     } else {
       setShowUpload(true);
+      setMaxCount(e.target.value === 1 ? 1 : 3);
     }
   };
 
@@ -140,6 +145,7 @@ const Publish = () => {
                 action={"http://geek.itheima.net/v1_0/upload"}
                 name="image"
                 onChange={onUploadImg}
+                maxCount={maxCount}
               >
                 <div style={{ marginTop: 8 }}>
                   <PlusOutlined />
