@@ -15,12 +15,28 @@ import {
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import img404 from "@/assets/error.png";
 import { useChannel } from "@/hooks/useChannel";
+import { useEffect, useState } from "react";
+import { getArticleListAPI } from "@/apis/article";
 
 const Article = () => {
   /**
    * 获取 channelList 数据
    */
   const { channelList } = useChannel();
+
+  /**
+   * 获取文章列表数据
+   */
+  const [count, setCount] = useState(0);
+  const [articleList, setArticleList] = useState([]);
+  useEffect(() => {
+    const fetchArticleList = async () => {
+      const res = await getArticleListAPI();
+      setArticleList(res.data.results);
+      setCount(res.data.total_count);
+    };
+    fetchArticleList();
+  }, []);
 
   const status = {
     1: <Tag color="warning">Pending Review</Tag>,
@@ -142,13 +158,13 @@ const Article = () => {
         </Form>
       </Card>
       {/* 表格区域 */}
-      <Card title={`Got 1 result based on the filter conditions:`}>
+      <Card title={`Got ${count} results based on the filter conditions:`}>
         <Table
           rowKey="id"
           columns={columns}
-          // dataSource={list}
+          dataSource={articleList}
           pagination={{
-            total: 1,
+            total: count,
             // pageSize: reqData.per_page,
             // onChange: onPageChange,
           }}
