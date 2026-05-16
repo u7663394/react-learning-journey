@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   Breadcrumb,
@@ -125,7 +125,7 @@ const Article = () => {
               type="primary"
               shape="circle"
               icon={<EditOutlined />}
-              // onClick={() => navigate(`/publish?id=${data.id}`)}
+              onClick={() => navigate(`/publish?id=${data.id}`)}
             />
             <Popconfirm
               title="Delete Article"
@@ -165,6 +165,11 @@ const Article = () => {
   const onPageChange = (page, pageSize) => {
     setReqData({ ...reqData, page, per_page: pageSize });
   };
+
+  /**
+   * 编辑跳转
+   */
+  const navigate = useNavigate();
 
   return (
     <div>

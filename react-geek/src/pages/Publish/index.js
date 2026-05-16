@@ -11,12 +11,12 @@ import {
   message,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
-import { useState } from "react";
-import { publishArticleAPI } from "@/apis/article";
+import { useEffect, useState } from "react";
+import { getArticleDetailAPI, publishArticleAPI } from "@/apis/article";
 import { useChannel } from "@/hooks/useChannel";
 
 const Publish = () => {
@@ -77,6 +77,23 @@ const Publish = () => {
     }
   };
 
+  /**
+   * 编辑时回显数据
+   */
+  // 1. 获取路由上的 ID
+  const [searchParams] = useSearchParams();
+  const articleId = searchParams.get("id");
+  const [form] = Form.useForm();
+  // 2. 根据 ID 获取文章详情数据
+  useEffect(() => {
+    const fetchArticleDetail = async () => {
+      const res = await getArticleDetailAPI(articleId);
+      // 3. 将数据回显到表单中 -> setFieldsValue
+      form.setFieldsValue(res.data);
+    };
+    if (articleId) fetchArticleDetail();
+  }, [articleId]);
+
   return (
     <div className="publish">
       <Card
@@ -84,7 +101,7 @@ const Publish = () => {
           <Breadcrumb
             items={[
               { title: <Link to={"/"}>Home</Link> },
-              { title: "Publish Article" },
+              { title: articleId ? "Edit Article" : "Publish Article" },
             ]}
           />
         }
@@ -94,6 +111,7 @@ const Publish = () => {
           wrapperCol={{ span: 16 }}
           initialValues={{ type: 0 }}
           onFinish={onFinish}
+          form={form}
         >
           <Form.Item
             label="Title"
