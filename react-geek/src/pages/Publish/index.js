@@ -35,12 +35,19 @@ const Publish = () => {
    * 提交表单
    */
   const onFinish = async (formData) => {
+    // 0. 验证图片数量是否正确
+    if (fileList.length !== imageType) {
+      return message.warning("Please upload the correct number of images");
+    }
     // 1. 按照接口要求，处理数据
     const { title, content, channel_id } = formData;
     const requireData = {
       title: title,
       content: content,
-      cover: { type: 0, images: [] },
+      cover: {
+        type: imageType,
+        images: fileList.map((ele) => ele.response.data.url),
+      },
       channel_id: channel_id,
     };
     // 2. 调用发布接口
@@ -62,9 +69,11 @@ const Publish = () => {
    *   1. 控制上传组件的显示和隐藏
    *   2. 限制上传图片的数量
    */
+  const [imageType, setImageType] = useState(0);
   const [showUpload, setShowUpload] = useState(false);
   const [maxCount, setMaxCount] = useState(0);
   const onTypeSelect = (e) => {
+    setImageType(e.target.value);
     if (e.target.value === 0) {
       setShowUpload(false);
       setMaxCount(0);
