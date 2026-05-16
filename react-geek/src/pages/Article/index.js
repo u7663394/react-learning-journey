@@ -14,8 +14,14 @@ import {
 } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import img404 from "@/assets/error.png";
+import { useChannel } from "@/hooks/useChannel";
 
 const Article = () => {
+  /**
+   * 获取 channelList 数据
+   */
+  const { channelList } = useChannel();
+
   const status = {
     1: <Tag color="warning">Pending Review</Tag>,
     2: <Tag color="success">Review Approved</Tag>,
@@ -116,11 +122,11 @@ const Article = () => {
 
           <Form.Item label="Channel" name="channel_id">
             <Select placeholder="Select article channel" style={{ width: 200 }}>
-              {/* {channelList.map((item) => (
+              {channelList.map((item) => (
                 <Select.Option key={item.id} value={item.id}>
                   {item.name}
                 </Select.Option>
-              ))} */}
+              ))}
             </Select>
           </Form.Item>
 

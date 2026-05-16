@@ -15,21 +15,15 @@ import { Link } from "react-router-dom";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "./index.scss";
-import { useEffect, useState } from "react";
-import { getChannelsAPI, publishArticleAPI } from "@/apis/article";
+import { useState } from "react";
+import { publishArticleAPI } from "@/apis/article";
+import { useChannel } from "@/hooks/useChannel";
 
 const Publish = () => {
   /**
    * 频道列表
    */
-  const [channelList, setChannelList] = useState([]);
-  useEffect(() => {
-    const fetchChannels = async () => {
-      const res = await getChannelsAPI();
-      setChannelList(res.data.channels);
-    };
-    fetchChannels();
-  }, []);
+  const { channelList } = useChannel();
 
   /**
    * 提交表单
