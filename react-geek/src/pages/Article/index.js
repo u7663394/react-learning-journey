@@ -38,11 +38,17 @@ const Article = () => {
     fetchArticleList();
   }, []);
 
+  /**
+   * 适配文章状态: 枚举渲染
+   */
   const status = {
     1: <Tag color="warning">Pending Review</Tag>,
     2: <Tag color="success">Review Approved</Tag>,
   };
 
+  /**
+   * 表格列数据
+   */
   const columns = [
     {
       title: "Cover",
@@ -62,9 +68,6 @@ const Article = () => {
     {
       title: "Status",
       dataIndex: "status",
-      // data - 后端返回的状态status 根据它做条件渲染
-      // data === 1 => 待审核
-      // data === 2 => 审核通过
       render: (data) => status[data],
     },
     {
